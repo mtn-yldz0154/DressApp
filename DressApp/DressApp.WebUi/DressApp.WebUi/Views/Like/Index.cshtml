@@ -1,0 +1,134 @@
+﻿@using DressApp.WebUi.Data.Models
+@model LikeModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["message"] != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@TempData["message"]</strong> İsimli Ürün Favorilere Eklendi!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData["messages"] != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>@TempData["messages"]</strong> İsimli Ürün Favorilerden Silindi!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+<section class="h-100 h-custom">
+    <div class= "ml-3 py-3 h-80">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card-registration card-registration-2"
+                     style="border-radius: 15px">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-lg-10">
+                                <div class="p-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-5">
+                                        <h1 class="fw-bold mb-0 text-danger">Favorilerim</h1>
+                                        <h6 class="mb-0 text-muted">@Model.Count() Adet Ürün</h6>
+                                    </div>
+                                    <hr class="my-4" />
+
+                                    @if (@Model.Count() == 0)
+                                    {
+                                        <h6 style="color:red;">Favorilerinizde Ürün Bulunmamaktadır!</h6>
+                                    }
+                                    @foreach (var item in Model.LikeItems)
+                                    {
+                                        <div class="row mb-4   align-items-center">
+                                            <div class="col-md-1 col-lg-2 col-xl-2">
+                                                <img style="width:100px;height:100px;" src="/img/@item.ProductSmallImage" />
+                                            </div>
+                                            <div class="col-md-1 col-lg-2 col-sm-2">
+                                                <h6 class="text-muted">Ürün Adı</h6>
+                                                <h6 class="text-black mb-0">@item.ProductSmallName</h6>
+                                                 
+                                            </div>
+                                            <div class="col-md-3 col-lg-2 col-l-1 ">
+                                                <h6 class="text-muted">Beden/Num</h6>
+                                                <h6 class="mb-0">@item.ProductSize </h6>
+
+                                            </div>
+                                         
+                                            <div class="col-md-1 col-lg-1 col-xl-1 ">
+                                                <h6 class="text-muted">Fiyatı</h6>
+                                                <h6 class="mb-0">@item.ProductPrice <i class="fa fa-turkish-lira" style="font-size:13px;"></i></h6>
+                                               
+                                            </div>
+                                            <div class="col-md-1 col-lg-2 col-xl-2 offset-lg-1">
+                                                <form asp-controller="Like" asp-action="DeleteFromLike" method="post" style="display:inline">
+                                                    <input type="hidden" name="productId" value="@item.ProductId">
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                        <i class="fa fa-heart me-1"> Favorilerden Sil</i>
+                                                    </button>
+                                                </form>
+                                                </div>
+                                            <div class="col-md-1 col-lg-4 col-xl-2 ">
+                                                <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline">
+                                                    <input type="hidden" name="productId" value="@item.ProductId">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <button type="submit" class="btn btn-outline-success btn-sm">
+                                                        <i class="fas fa-cart-plus" > Sepete Ekle</i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            
+                                            
+                                            
+
+
+                                          
+
+
+                                        </div>
+                                    }
+
+
+                                    <hr class="my-4" />
+
+
+
+                                    <div class="pt-5">
+                                        <h6 class="mb-0">
+                                            <a href="/User/Page" class="btn btn-outline-danger">
+                                                Back
+                                                to shop
+                                            </a>
+                                        </h6>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*
+                                            <div class="col-md-1 col-lg-2 col-xl-3 ">
+                                                <a id="go" class="btn btn-danger" href="/Like/DeleteFromLike/@item.ProductId" onclick="alert('Ürün Favorilerdem Kaldırıldı!');"> <img style="width:25px;height:25px;" draggable="false" role="img" class="emoji td-animation-stack-type0-2" alt="🤍" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f90d.svg"><span style="padding-left:15px;">Favorilerden Sil</span></a>
+                                                <a style="position:absolute;margin-left:25px;" id="go" class="btn btn-success" href="/User/AddSepet/@item.ProductId" onclick="alert('Ürün Sepete Eklendi!');">  <img style="width:30px;height:30px;" src="~/img/Sepet.png" />       Sepete Ekle</a>
+                                            </div>*@

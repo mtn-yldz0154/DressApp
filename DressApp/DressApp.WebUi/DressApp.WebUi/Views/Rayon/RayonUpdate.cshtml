@@ -1,0 +1,31 @@
+﻿@model DressApp.WebUi.Data.Models.Rayon
+@{
+    ViewData["Title"] = "RayonUpdate";
+    Layout = "~/Views/Shared/_adminlayout.cshtml";
+}
+
+<h1>Rayon Update</h1>
+<hr />
+<br />
+
+@using (Html.BeginForm("RayonUpdate", "Rayon", FormMethod.Post))
+{
+  
+ 
+    @Html.LabelFor(x=>x.RayonId)
+    @Html.TextBoxFor(x=>x.RayonId,new {@class="form-control"})
+   
+
+    @Html.ValidationMessageFor(x=>x.RayonName,"",new{@style="color:red"})
+        <br />
+    @Html.LabelFor(x=>x.RayonName)
+    @Html.TextBoxFor(x=>x.RayonName,new {@class="form-control"})
+        <br />
+    @Html.LabelFor(x=>x.RayonDescription)
+    @Html.TextBoxFor(x=>x.RayonDescription,new {@class="form-control"})
+        <br />
+      <button class="btn btn-primary">Rayon Update</button>
+
+}
+
+

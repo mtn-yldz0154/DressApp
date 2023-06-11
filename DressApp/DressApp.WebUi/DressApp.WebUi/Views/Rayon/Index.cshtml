@@ -1,0 +1,35 @@
+﻿@using DressApp.WebUi.Data.Models
+@model List<Rayon>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_adminlayout.cshtml";
+}
+
+<h2>Rayons</h2>
+
+<br />
+<table class="table table-bordered table-striped table-hover  table-dark">
+    
+    <tr class="thead-dark">
+        <th>Id</th>
+        <th>Rayon</th>
+        <th>Details</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.RayonId</td>
+            <td>@item.RayonName</td>
+            <td><a href="/Rayon/Details/@item.RayonId" class="btn btn-info">Details</a></td>
+            <td><a href="/Rayon/RayonUpdate/@item.RayonId" class="btn btn-warning">Update</a></td>
+            <td><a href="/Rayon/RayonDelete/@item.RayonId" class="btn btn-danger">Delete</a></td>
+        </tr>
+    }
+
+
+
+</table>
+
+<a href="/Rayon/RayonAdd/" class="btn btn-primary">New Rayon</a>

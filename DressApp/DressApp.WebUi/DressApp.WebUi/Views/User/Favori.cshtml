@@ -1,0 +1,98 @@
+﻿@using DressApp.WebUi.Data.Models
+@model List<Favori>
+@{
+    ViewData["Title"] = "Favori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<section class="h-100 h-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card-registration card-registration-2"
+                     style="border-radius: 15px">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-lg-10">
+                                <div class="p-5">
+                                    <div class="d-flex justify-content-between align-items-center mb-5">
+                                        <h1 class="fw-bold mb-0 text-danger">Favorilerim</h1>
+                                        <h6 class="mb-0 text-muted">@ViewBag.like Adet Ürün</h6>
+                                    </div>
+                                    <hr class="my-4" />
+                                    
+                                    @if(ViewBag.like==0)
+                                    {
+                                        <h6 style="color:red;">Favorilerinizde Ürün Bulunmamaktadır!</h6>
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="row mb-4   align-items-center">
+                                            <div class="col-md-1 col-lg-2 col-xl-2">
+                                                <img style="width:100px;height:100px;" src="/img/@item.FavoriImageUrl" />
+                                            </div>
+                                            <div class="col-md-1 col-lg-3 col-l-3">
+                                                <h6 class="text-muted">Ürün Adı</h6>
+                                                <h6 class="text-black mb-0">@item.FavoriName</h6>
+                                            </div>
+                                            <div class="col-md-1 col-lg-3 col-xl-2 d-flex">
+                                                <button class="btn btn-link px-2"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                </button>
+
+                                                <input id="form1"
+                                                   min="0"
+                                                   name="quantity"
+                                                   value="1"
+                                                   type="number"
+                                                   class="form-control form-control-sm" />
+
+                                                <button class="btn btn-link px-2"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                </button>
+                                            </div>
+                                            <div class="col-md-1 col-lg-2 col-xl-1 offset-lg-1">
+                                                <h6 class="text-muted">Fiyatı</h6>
+                                                <h6 class="mb-0">@item.FavoriPrice <i class="fa fa-turkish-lira" style="font-size:13px;"></i></h6>
+
+                                            </div>
+                                            <div class="col-md-1 col-lg-2 col-xl-3 ">
+                                                <a id="go" class="btn btn-danger" href="/User/DeleteFavori/@item.UrunSayisi" onclick="alert('Ürün Favorilerdem Kaldırıldı!');"> <img style="width:20px;height:20px;" draggable="false" role="img" class="emoji td-animation-stack-type0-2" alt="🤍" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f90d.svg"><span style="padding-left:15px;">Favorilerden Kaldır</span></a>
+                                                <a style="position:absolute;margin-left:25px;" id="go" class="btn btn-success" href="/User/AddSepet/@item.UrunSayisi" onclick="alert('Ürün Sepete Eklendi!');">  <img style="width:30px;height:30px;" src="~/img/Sepet.png" />       Sepete Ekle</a>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    }
+
+
+                                    <hr class="my-4" />
+
+
+
+                                    <div class="pt-5">
+                                        <h6 class="mb-0">
+                                            <a href="/User/Page" class="btn btn-outline-danger">
+                                                Back
+                                                to shop
+                                            </a>
+                                        </h6>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

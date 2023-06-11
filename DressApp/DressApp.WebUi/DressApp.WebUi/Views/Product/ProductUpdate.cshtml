@@ -1,0 +1,135 @@
+﻿@model DressApp.WebUi.Data.Models.Product
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "ProductUpdate";
+    Layout = "~/Views/Shared/_adminlayout.cshtml";
+}
+
+<h2>Product Update</h2>
+<hr />
+
+@*
+@using (Html.BeginForm("ProductUpdate", "Product", FormMethod.Post))
+{
+
+    @Html.Label("Product Id")
+    @Html.TextBoxFor(x=>x.ProductId,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Name")
+    @Html.TextBoxFor(x=>x.ProductName,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Despcription")
+    @Html.TextAreaFor(x=>x.ProductDescription,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Stock")
+    @Html.TextBoxFor(x=>x.ProductStock,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Size")
+    @Html.TextBoxFor(x=>x.ProductSize,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Price")
+    @Html.TextBoxFor(x=>x.ProductPrice,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product İmage")
+    @Html.TextBoxFor(x=>x.ProductImageUrl,new{@class="form-control"})
+    <br />
+
+     @Html.Label("Product Rayon")
+    <option selected disabled>Seçiniz</option>
+    @Html.DropDownListFor(i=>i.RayonId,(List<SelectListItem>)ViewBag.Values,new{@class="form-control"})
+
+    <br />
+
+    <button class="btn btn-primary">Product Update</button>
+}*@
+
+<form asp-controller="Product" asp-action="ProductUpdate" method="POST" enctype="multipart/form-data">
+
+    @Html.Label("Product Id")
+    @Html.TextBoxFor(x=>x.ProductId,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Name")
+    @Html.TextBoxFor(x=>x.ProductName,new{@class="form-control"})
+    <br />
+    @Html.Label("Product Long Name")
+    @Html.TextBoxFor(x=>x.LongProductName,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Despcription")
+    @Html.TextAreaFor(x=>x.ProductDescription,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Stock")
+    @Html.TextBoxFor(x=>x.ProductStock,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Size")
+    @Html.TextBoxFor(x=>x.ProductSize,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Price")
+    @Html.TextBoxFor(x=>x.ProductPrice,new{@class="form-control"})
+    <br />
+    @Html.Label("Product Kreaksiyon")
+    @Html.TextBoxFor(x=>x.Kreaksiyon,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Ozellik")
+    @Html.TextBoxFor(x=>x.Ozellik,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product SalePrice")
+    @Html.TextBoxFor(x=>x.SalePrice,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Color")
+    @Html.TextBoxFor(x=>x.Color,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product İmage")
+    @Html.TextBoxFor(x=>x.ProductImageUrl,new{@class="form-control"})
+    <br />
+    @Html.Label("Product Small İmage")
+    @Html.TextBoxFor(x=>x.SmallImageUrl,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Rayon")
+
+    <option selected disabled>Seçiniz</option>
+    @Html.DropDownListFor(i=>i.RayonId,(List<SelectListItem>)ViewBag.Values,new{@class="form-control"})
+
+    <br />
+    <div class="form-group row">
+        <label asp-for="ProductImageUrl" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input type="hidden" asp-for="ProductImageUrl">
+            <input type="file" name="file">
+        </div>
+    </div>
+    <br />
+    <div class="form-group row">
+        <label asp-for="SmallImageUrl" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input type="hidden" asp-for="SmallImageUrl">
+            <input type="file" name="files">
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-outline-primary">Save Product</button>
+        </div>
+    </div>
+
+</form>
+

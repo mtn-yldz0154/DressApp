@@ -1,0 +1,78 @@
+﻿@model DressApp.WebUi.Data.Models.Product
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_adminlayout.cshtml";
+}
+
+@*<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="container mt-3">
+
+
+        <div class="card" style="width:300px;height:550px;margin-left:60px;">
+            <img class="card-img-top" src="~/img/@Model.ProductImageUrl" alt="Card image" style="width:80%">
+            <div class="card-body">
+                <h3 class="card-title">Ürün Adı:@Model.ProductName</h3>
+                <div class="mb-3">
+
+                    <p class="p-3"><h4>Ürün Kategori:@ViewBag.detay    </h4>   Ürün Adeti:@Model.ProductStock </p>
+                    <h5 class="text-primary mb-3">
+                        Ürün Puanı:
+                        @Model.ProductPrice     <i class="fas fa-lira-sign"></i>
+                    </h5>
+                </div>
+                <td><a href="/Urun/Update/@Model.ProductId" class="btn btn-warning btn-lg" pr-3>Düzenle</a></td>
+                <td><a href="/Urun/Delete/@Model.ProductId" class="btn btn-danger btn-lg">Sil</a></td>
+            </div>
+        </div>
+        <br>
+
+
+    </div>
+
+</body>
+</html>
+
+*@
+<br />
+<h1>Ürün Detay</h1>
+<hr />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<div style="margin-top: 70px;margin-bottom: 80px;margin-left:30px; " class="row">
+    <div class="col-md-3">
+   
+        <img src="~/img/@Model.ProductImageUrl" class="img-fluid">
+    </div>
+    <div class="col-md-9 mt-1">
+        <h3 class="class=" text-primary" style="color:cornflowerblue">
+            <p style="display:inline;font-size:18px;color:black">Ürün Adı:</p> @Model.ProductName</h3> <hr>
+        <h4 style="color:cornflowerblue"><p style="display:inline;font-size:20px;color:black">Ürün Rayonu:</p> @Model.Rayon.RayonName Rayonu</h4>
+            <div class="mb-5">
+            <h4 style="color:cornflowerblue">  <p style="display:inline;font-size:20px;color:black">Ürün Bedeni:</p> @Model.ProductSize</h4>
+                <br />
+            <h4 style="color:cornflowerblue"> <p style="display:inline;font-size:20px;color:black">Ürün Açıklaması:</p> @Model.ProductDescription</h4>
+                
+            <h4 style="color:cornflowerblue"> <p style="display:inline;font-size:20px;color:black">Ürün Stok Adeti:</p> @Model.ProductStock</h4>
+                <br /><br />
+            <h4 style="color:darkblue" >
+                <p style="display:inline;font-size:21px;color:black;">Ürün Fiyatı:</p>
+                    @Model.ProductPrice <i class="fa fa-turkish-lira" style="font-size:20px;"></i>
+                </h4>
+                <br />
+            <td><a href="/Product/ProductUpdate/@Model.ProductId" class="btn btn-warning btn-lg mr-3">Update</a></td>
+            <td><a href="/Product/ProductDelete/@Model.ProductId" class="btn btn-danger btn-lg">Delete</a></td>
+                </h6>
+            </div>
+    </div>

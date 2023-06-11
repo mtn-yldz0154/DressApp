@@ -1,0 +1,164 @@
+﻿@using DressApp.WebUi.Data.Models
+@model CartModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+@if (TempData["message"] != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@TempData["message"]</strong> İsimli Ürün Sepete Eklendi!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData["messages"] != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>@TempData["messages"]</strong> İsimli Ürün Sepetten Silindi!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+
+<section class="">
+    <div class="">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            
+            
+                <div class="col-12">
+                    <div class="card card-registration card-registration-2"
+                     style="border-radius: 15px">
+                        <div class="card-body p-0">
+                            <div class="row g-0">
+                                <div class="col-lg-8">
+                                    <div class="">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h1 style="margin-left:20px;" class="fw-bold mt-4 text-success">Alışveriş Sepetim</h1>
+                                            <h6 class="mt-5 text-muted">@Model.Count() Farklı Ürün</h6>
+                                        </div>
+                                        <hr class="my-4" />
+                                    @if (Model.Count() == 0)
+                                    {
+                                        <h6 style="margin-left:30px;margin-bottom:200px;" class="text-success">Sepetinizde Ürün Bulunmamaktadır!</h6>
+
+                                    }
+                                        @foreach (var item in Model.CartItems)
+                                        {
+                                            <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                    <img style="width:100px;height:100px;margin-left:10px;" src="/img/@item.ImageUrl" />
+                                                </div>
+                                                <div class="col-md-2 ">
+                                                    <h6 class="text-muted">Ürün Adı</h6>
+                                                    <h6 class="text-black mb-0">@item.Name</h6>
+                                                </div>
+                                                <div class="col-md-2 ">
+                                                    <h6 class="text-muted">Ürün Fiyatı</h6>
+                                                    <h6 class="mb-0">@(item.Price) <i class="fa fa-turkish-lira" style="font-size:13px;"></i></h6>
+
+                                                </div>
+                                                <div class="col-md-2 ">
+                                                    <h6 class="text-muted">Ürün Adeti</h6>
+                                                    <h6 class="text-black mb-0">@item.Quantity</h6>
+                                                </div>
+                                                <div class="col-md-2 ">
+                                                    <h6 class="text-muted">Toplam Fiyat</h6>
+                                                    <h6 class="text-black ">@(item.Quantity * item.Price) <i class="fa fa-turkish-lira" style="font-size:13px;"></i></h6>
+                                                </div>
+
+                                                <div class="col-md-2   ">
+                                                    @* <a style="width:120px;" href="/Cart/DeleteFromCart/@item.ProductId" class="btn btn-outline-danger btn-sm">
+                                            <img width="20px;height:25px;" src="~/img/çöp.jpg" /> <span>Sepetten Sil</span>
+                                            </a>*@
+                                                    <form asp-controller="Cart" asp-action="DeleteFromCart" method="post">
+                                                        <input type="hidden" name="productId" value="@item.ProductId">
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                            <i class="fa fa-times fa-fw"></i> Kaldır
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        }
+
+
+                                      @*  <hr class="my-4" />*@
+
+
+
+                                        <div style="margin-left:30px;" class="pt-5">
+                                            <h6  class="mb-4">
+                                                <a href="/User/Page" class="btn btn-outline-success">
+                                                    Alışverişe Dön
+                                                </a>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Model.Count() >0)
+                                    {
+                                       
+                                   
+                                <div class="col-lg-4 bg-grey">
+                                    <div class="p-5">
+                                        <h3 style="margin-top:-14px;text-align:center" class="fw-bold mb-5 pt-1">Sepet Özeti</h3>
+                                        <hr style="margin-top:-14px;" />
+
+                                        <div class="d-flex justify-content-between mb-5">
+                                            <h5 class=" mt-3">Sepet Tutarı @ViewBag.Total </h5>
+                                            <h5 class="mt-3">@Model.TotalPrice().ToString("c") </h5>
+                                        </div>
+
+                                        <h5 class="text-uppercase mb-3">Kargo Firması</h5>
+
+                                        <div class="mb-4 pb-2">
+                                            <select class="select">
+                                                <option value="1">Kargo Firması Seçiniz...</option>
+                                                <option value="1">Yurtiçi Kargo</option>
+                                                <option value="2">Mng Kargo</option>
+                                                <option value="3">Ptt</option>
+                                                <option value="4">Aras </option>
+                                            </select>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-5 mt-5">
+                                            <h5 class="">Sipariş Tutarı</h5>
+                                            <h5>
+                                                @Model.TotalPrice().ToString("c")
+
+                                            </h5>
+@*
+                                            <button style="position:absolute;margin-left:260px;width:120px;height:35px;" type="button"
+                                                class="btn btn-outline-dark btn-sm "
+                                                data-mdb-ripple-color="dark">
+                                                Siparişi Tamamla
+                                            </button>*@
+
+                                           
+                                        </div>
+                                        <a style="width:100%;height:40px;" class="btn btn-outline-dark btn-sm" href="/checkout"> Siparişi Tamamla </a>
+
+                                        <hr style="margin-top:25px;" class="" />
+
+
+                                        ,
+
+                                    </div>
+                                </div>
+                            }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+        </div>
+    </div>
+</section>

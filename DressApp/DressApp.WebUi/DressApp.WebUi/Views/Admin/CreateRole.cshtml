@@ -1,0 +1,22 @@
+﻿@using DressApp.WebUi.Data.Models
+@model RoleModel
+
+@{
+    ViewData["Title"] = "CreateRole";
+    Layout = "~/Views/Shared/_adminlayout.cshtml";
+}
+
+<h1>Create Role</h1>
+
+
+@using (Html.BeginForm("CreateRole", "Admin", FormMethod.Post))
+{
+    @Html.ValidationMessageFor(x=>x.RoleName,"",new{@style="color:red"})
+        <br />
+    @Html.LabelFor(x=>x.RoleName)
+    @Html.TextBoxFor(x=>x.RoleName,new {@class="form-control"})
+        <br />
+   
+      <button class="btn btn-primary">Role Add</button>
+
+}

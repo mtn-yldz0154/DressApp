@@ -1,0 +1,301 @@
+﻿@model DressApp.WebUi.Data.Models.ProductModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/bootstrap.css" />
+
+<style>
+    btn.btn-a{
+        background-color: 6610f2;
+        color:white;
+    }
+    .checked {
+        color: orange;
+    }
+
+    button.a:hover {
+        background-color: navajowhite;
+    }
+</style>
+
+
+
+
+    <section class="py-4">
+        <div class="container">
+            <div class="row">
+                <aside class="col-lg-5">
+                    <div class="gallery-wrap">
+                        <div class="img-big-wrap img-thumbnail">
+                            <a href="~/img/@Model.ProductImageUrl" data-type="image" data-fslightbox="mygallery">
+                                <img style="width:100%;height:400px;" src="~/img/@Model.ProductImageUrl" alt="">
+                            </a>
+                        </div>
+                        <div class="thumbs-wrap">
+                            @foreach (var a in Model.Products)
+                        {
+                            <a href="~/img/@a.ProductImageUrl" data-type="image" data-fslightbox="mygallery">
+                                <img width="60" height="60" src="~/img/@a.SmallImageUrl" alt="">
+                            </a>
+                        }   
+                       
+                        </div>
+                    </div>
+                </aside>
+                <main class="col-lg-7">
+                    <article>
+                        <h4 class="title tex-dark">
+                           @Model.LongProductName
+                        </h4>
+                    @if (Model.StarNumber == 0)
+                    {
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                    }
+                    @if (Model.StarNumber > 0 && Model.StarNumber < 20)
+                    {
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                    }
+                    @if (Model.StarNumber > 20 && Model.StarNumber < 40)
+                    {
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                    }
+                    @if (Model.StarNumber >= 40 && Model.StarNumber < 60)
+                    {
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star "></span>
+                        <span class="fa fa-star "></span>
+                    } @if (Model.StarNumber > 60 && Model.StarNumber < 80)
+                    {
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star "></span>
+                    }
+                    @if (Model.StarNumber > 80)
+                    {
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                    }
+                    @if (Model.ProductStock > 100)
+                    {
+                        <p class="text-success">Stokta</p>
+                    }
+                    else if(Model.ProductStock>0 && Model.ProductStock<100)
+                    {
+                        <p class="text-danger">Tükenmek Üzere!</p>
+                    }
+                    else
+                    {
+                        <p class="text-success">Stokta Yok</p>
+                    }
+
+                        <div class="mb-3">
+                        <b class="price h5">@Model.ProductPrice <i class="fa fa-turkish-lira" style="font-size:13px;padding:0px;"></i> </b>
+                        </div>
+                        <div class="product-desc">
+                            <p>@Model.ProductDescription</p>
+                        </div>
+                        <dl class="row bottom-bottom">
+                            <dt class="col-3">Renk:</dt>
+                            <dd class="col-9">@Model.Color</dd>
+                        @if (Model.ProductName.Contains("Stiletto"))
+                        {
+                            <dt class="col-3">Numara:</dt>
+                        }
+                        else
+                        {
+                            <dt class="col-3">Beden:</dt>
+                        }
+                       
+                            <dd class="col-9">@Model.ProductSize</dd>
+                        <dt class="col-3">Ağırlık:</dt>
+                        <dd class="col-9">@Model.Ozellik gr</dd>
+                            
+                        </dl>
+                        <div class="row mb-4">
+                            
+                        </div>
+                        <div class="buttons">
+                        <form asp-controller="Cart" asp-action="AddToCart" method="POST" style="display: inline;">
+                            <input type="hidden" name="productId" value="@Model.ProductId">
+                            <input type="hidden" name="quantity" value="1">
+                            <button style="width:30%;margin-left:25px;margin-bottom:10px;" type="submit" class=" btn btn-success w-20"><i style="margin-right:7px;" class="fas fa-cart-plus"> </i>Sepete Ekle</button>
+                        </form>
+                        <form asp-controller="Like" asp-action="AddToLike" method="POST" style="display: inline;">
+                            <input type="hidden" name="productId" value="@Model.ProductId">
+                            <input type="hidden" name="quantity" value="1">
+                            <button style="width:30%;margin-left:25px;margin-bottom:10px;background-color:indianred" type="submit" class=" btn  w-20"><i style="margin-right:9px;" class="fa fa-heart me-1"> </i>Favori Ekle</button>
+                        </form>
+                           
+                            
+                        </div>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </section>
+    @if(Model.Products.Count>0)
+{
+    <section class="py-4">
+        <div class="container">
+            <header class="section-heading">
+                <h3 class="mb-3">Benzer Ürünler</h3>
+                <hr />
+                <br />
+            </header>
+            <div class="row">
+                @foreach (var item in Model.Products)
+                {
+
+                    <div class=" hover col-lg-3 col-sm-6 col-12">
+
+                        <figure class="card shadow">
+                            <div class="img-wrap">
+
+
+                                <a href="/user/details/@item.ProductId"> <img style="width:100%;height:180px;" src="~/img/@item.SmallImageUrl" alt=""></a>
+
+                            </div>
+                            <figcaption class="info-wraporder-top">
+
+                                <p style="margin-left:10px;color:darkslateblue"> @item.LongProductName.Substring(0,30)...</p>
+                                <div class="price-wrap mb-3">
+                                    @if(item.SalePrice>0)
+                                    {
+                                        <del style="margin-left:30px;margin-right:10px;" class="price-old">@item.SalePrice  <i class="fa fa-turkish-lira" style="font-size:13px;padding-left:0px;"></i></del>
+                                        <strong class="price">
+                                            @item.ProductPrice <i class="fa fa-turkish-lira" style="font-size:13px;padding:0px;"></i>
+                                        </strong>
+                                    }
+                                    else
+                                    {
+                                        <strong style="margin-left:40px"; class="price">
+                                            @item.ProductPrice <i class="fa fa-turkish-lira" style="font-size:13px;padding:0px;"></i>
+                                        </strong>
+                                    }
+
+                                    
+                                </div>
+                                <form asp-controller="Like" asp-action="AddToLike" method="POST" style="display: inline;">
+                                    <button title="Favorilere Ekle" class=" a btn btn-light" style="display:inline;position:absolute;margin-top:-45px;margin-left:180px" type="submit">  <img style="width:25px;height:25px;" draggable="false" role="img" class="emoji" alt="🖤" src="https://symbl-world.akamaized.net/i/webp/ce/7cdb1cae544d41f3c51f35ff8fcdf0.webp" alt="Siyah Kalp Kıyafeti">  </button>
+                                    <input type="hidden" name="productId" value="@item.ProductId">
+                                    <input type="hidden" name="quantity" value="1">
+
+                                </form>
+                                <form asp-controller="Cart" asp-action="AddToCart" method="POST" style="display: inline;">
+                                    <input type="hidden" name="productId" value="@item.ProductId">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button style="width:80%;margin-left:25px;margin-bottom:10px;" type="submit" class="b btn btn-outline-success w-80"><i style="margin-right:7px;" class="fas fa-cart-plus"> </i>Sepete Ekle</button>
+                                </form>
+
+
+                            </figcaption>
+                        </figure>
+
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+    </section>
+
+}
+else
+{
+    <section class="py-4">
+        <div class="container">
+            <header class="section-heading">
+                <h3 class="mb-3">Önerilen Ürünler</h3>
+                <hr />
+                <br />
+            </header>
+            <div class="row">
+                @foreach (var item in Model.Onerilen)
+                {
+
+                    <div class=" hover col-lg-3 col-sm-6 col-12">
+
+                        <figure class="card shadow">
+                            <div class="img-wrap">
+
+
+                                <a href="/user/details/@item.ProductId"> <img style="width:100%;height:180px;" src="~/img/@item.SmallImageUrl" alt=""></a>
+
+                            </div>
+                            <figcaption class="info-wraporder-top">
+
+                                <p style="margin-left:10px;color:darkslateblue"> @item.LongProductName.Substring(0,30)...</p>
+                                <div class="price-wrap mb-3">
+                                    @if (item.SalePrice > 0)
+                                    {
+                                        <strong class="price">
+                                            @item.ProductPrice <i class="fa fa-turkish-lira" style="font-size:13px;padding:0px;"></i>
+                                        </strong>
+                                        <del style="" class="price-old">@item.SalePrice  <i class="fa fa-turkish-lira" style="font-size:13px;padding-left:0px;"></i></del>
+                                        
+                                    }
+                                    else
+                                    {
+                                        <strong style="margin-left:40px" ; class="price">
+                                            @item.ProductPrice <i class="fa fa-turkish-lira" style="font-size:13px;padding:0px;"></i>
+                                        </strong>
+                                    }
+
+
+                                </div>
+                                <form asp-controller="Like" asp-action="AddToLike" method="POST" style="display: inline;">
+                                    <button title="Favorilere Ekle" class=" a btn btn-light" style="display:inline;position:absolute;margin-top:-45px;margin-left:180px" type="submit">  <img style="width:25px;height:25px;" draggable="false" role="img" class="emoji" alt="🖤" src="https://symbl-world.akamaized.net/i/webp/ce/7cdb1cae544d41f3c51f35ff8fcdf0.webp" alt="Siyah Kalp Kıyafeti">  </button>
+                                    <input type="hidden" name="productId" value="@item.ProductId">
+                                    <input type="hidden" name="quantity" value="1">
+
+                                </form>
+                                <form asp-controller="Cart" asp-action="AddToCart" method="POST" style="display: inline;">
+                                    <input type="hidden" name="productId" value="@item.ProductId">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button style="width:80%;margin-left:25px;margin-bottom:10px;" type="submit" class="b btn btn-outline-success w-80"><i style="margin-right:7px;" class="fas fa-cart-plus"> </i>Sepete Ekle</button>
+                                </form>
+
+
+                            </figcaption>
+                        </figure>
+
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+    </section>
+    
+}
+
+
+
+
+
+   
+

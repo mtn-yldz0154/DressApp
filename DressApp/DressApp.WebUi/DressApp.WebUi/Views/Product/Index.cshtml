@@ -1,0 +1,84 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model List<DressApp.WebUi.Data.Models.Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_adminlayout.cshtml";
+}
+
+@section Css
+    {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+}
+
+@section Scripts
+    {
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+
+}
+<h2>Products</h2>
+
+<br />
+<table  id="myTable"  class="table table-bordered table-striped table-hover table-dark">
+
+    <tr>
+        <th>Id</th>
+        <th>Rayon</th>
+        <th>Stok</th>
+        <th>Price</th>
+        <th>Rayon</th>
+        <th>Detay</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    
+        <tr>
+            <th>@item.ProductId</th>
+            <td>@item.ProductName</td>
+            <td>@item.ProductStock</td>
+            <td>@item.ProductPrice<i class="fas fa-lira-sign"></i></td>
+            <td>@item.Rayon.RayonName</td>
+            <td><a href="/Product/Details/@item.ProductId" class="btn btn-info">Details</a></td>
+            <td><a href="/Product/ProductUpdate/@item.ProductId" class="btn btn-warning">Update</a></td>
+            <td><a href="/Product/ProductDelete/@item.ProductId" class="btn btn-danger">Delete</a></td>
+        </tr>
+    }
+
+
+
+</table>
+
+
+
+
+@*<div class="pagination-container">
+
+    <ul class="pagination  ">
+        <li class="page-item bg-dark  "><a class="page-link" href="/Product/Index/?page=1" rel="prev">Pervios</a></li>
+        <li class="page-item   bg-danger"><a class="page-link" href="/Product/Index/?page=1">1</a></li>
+        <li class="page-item bg-dark"><a class="page-link" href="/Product/Index/?page=2">2</a></li>
+        <li class="page-item bg-dark"><a class="page-link" href="/Product/Index/?page=3">3</a></li>
+        <li class="page-item bg-danger"><a class="page-link" href="/Product/Index/?page=" rel="next">Next</a></li>
+
+
+    </ul>
+   </div>*@
+
+
+<a href="/Product/ProductAdd/" class="btn btn-primary">New Product</a>
+
+        <br />
+        <br />
+
+
+        

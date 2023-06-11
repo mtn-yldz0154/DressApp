@@ -1,0 +1,181 @@
+﻿@model DressApp.WebUi.Data.Models.Product
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "ProductAdd";
+    Layout = "~/Views/Shared/_adminlayout.cshtml";
+}
+
+<h2>Product Add</h2>
+<hr />
+<br />
+
+@*@using (Html.BeginForm("ProductAdd","Product",FormMethod.Post))
+{
+    @Html.Label("Product Name")
+    @Html.TextBoxFor(x=>x.ProductName,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Despcription")
+    @Html.TextAreaFor(x=>x.ProductDescription,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Stock")
+    @Html.TextBoxFor(x=>x.ProductStock,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Size")
+    @Html.TextBoxFor(x=>x.ProductSize,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Price")
+    @Html.TextBoxFor(x=>x.ProductPrice,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product İmage")
+    @Html.TextBoxFor(x=>x.ProductImageUrl,new{@class="form-control"})
+    <br />
+
+    @Html.Label("Product Rayon")
+    <option selected disabled>Seçiniz</option>
+    @Html.DropDownListFor(i=>i.RayonId,(List<SelectListItem>)ViewBag.Values,new{@class="form-control"})
+
+        <br />
+
+    <button class="btn btn-primary">Product Add</button>
+}*@
+
+<form asp-controller="Product" asp-action="ProductAdd" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="col-md-12">
+
+
+        <div class="form-group row">
+            <label asp-for="ProductName" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductName">
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="LongProductName" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="LongProductName">
+                <span asp-validation-for="LongProductName" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="ProductDescription" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <textarea class="form-control" asp-for="ProductDescription"></textarea>
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="ProductStock" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductStock">
+                <span asp-validation-for="ProductStock" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <label asp-for="ProductSize" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductSize">
+                <span asp-validation-for="ProductSize" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <label asp-for="ProductPrice" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ProductPrice">
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="Kreaksiyon" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Kreaksiyon">
+                <span asp-validation-for="Kreaksiyon" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <label asp-for="Color" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Color">
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <label asp-for="Ozellik" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Ozellik">
+                <span asp-validation-for="Ozellik" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="SalePrice" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="SalePrice">
+                <span asp-validation-for="SalePrice" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+
+        <div class="form-group row">
+
+            <option style="font-weight:800" selected disabled> Rayon Seçiniz</option>
+
+            @Html.DropDownListFor(i=>i.RayonId,(List<SelectListItem>)ViewBag.Values,new{@class="form-control"})
+        </div>
+
+        <br /><br />
+        <div class="form-group row">
+            <label asp-for="ProductImageUrl" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input type="hidden" asp-for="ProductImageUrl">
+                <input type="file" name="file">
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <label asp-for="SmallImageUrl" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input type="hidden" asp-for="SmallImageUrl">
+                <input type="file" name="files">
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-outline-primary">Save Product</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    </div>
+
+</form>
+
+

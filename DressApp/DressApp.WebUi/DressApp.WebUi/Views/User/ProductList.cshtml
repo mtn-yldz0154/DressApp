@@ -1,0 +1,138 @@
+﻿@model List<DressApp.WebUi.Data.Models.Product>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>  @ViewBag.entity  Ürünleri</h3>
+<hr />
+<br />
+
+
+<style>
+    .checked{
+            color:orange;
+        }
+
+    button.a:hover {
+        background-color: navajowhite;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container mt-3">
+    <div class="row">
+      
+
+
+      
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card hover2" style="width:320px;height:460px;margin-bottom:20px;margin-right:-45px;">
+                    <img id="hover" class="card-img-top " src="~/img/@item.ProductImageUrl" alt="Card image" style="width:100%;height:80%;">
+                    <div style="margin-top:10px;position:absolute;margin-left:180px;">
+                        @if (item.StarNumber == 0)
+                        {
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                        }
+                        @if (item.StarNumber > 0 && item.StarNumber <= 20)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                        }
+                        @if (item.StarNumber > 20 && item.StarNumber <= 40)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                        }
+                        @if (item.StarNumber >= 40 && item.StarNumber <= 60)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                        } @if (item.StarNumber > 60 && item.StarNumber <= 80)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                        }
+                        @if (item.StarNumber > 80)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        }
+
+                    </div>
+
+
+
+                    <form asp-controller="Like" asp-action="AddToLike" method="POST" style="display: inline;">
+                        <button title="Favorilere Ekle" class="a btn btn-light" style="display:inline;position:absolute;margin-top:45px;margin-left:240px" type="submit">  <img style="width:30px;height:30px;margin-right:3px;" src="https://symbl-world.akamaized.net/i/webp/ce/7cdb1cae544d41f3c51f35ff8fcdf0.webp" alt="Siyah Kalp Kıyafeti"> </button>
+                        <input type="hidden" name="productId" value="@item.ProductId">
+                        <input type="hidden" name="quantity" value="1">
+                    </form>
+
+
+
+
+
+
+                    <div class="card-body">
+
+
+                        <div class="mb-3">
+                            <h6 class="card-title ml-3" style="color:darkslateblue;margin-left:0px;"><p style="display:inline;color:black;">Ürün Adı: </p>@item.ProductName      <p style="display:inline;color:black;padding-left:4px;"> Fiyat:</p> @item.ProductPrice<i class="fa fa-turkish-lira" style="font-size:13px;"></i></h6>
+
+
+
+
+                        </div>
+
+                        <a href="/User/Details/@item.ProductId" class="btn btn-outline-primary " style="margin-right:10px;">Detaylar</a>
+                        @*                            <a id="go" class="btn btn-outline-success " style="margin-right:15px;" href="/Cart/AddToCart/@item.ProductId">  <img style="width:23px;height:23px;" src="~/img/Sepet.png" />       Sepete Ekle</a>*@
+                        <form asp-controller="Cart" asp-action="AddToCart" method="POST" style="display: inline;">
+                            <input type="hidden" name="productId" value="@item.ProductId">
+                            <input type="hidden" name="quantity" value="1">
+                            <button class="btn btn-outline-success w-20" type="submit">  <i class="fas fa-cart-plus"></i> Sepete Ekle</button>
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+                <br>
+            </div>
+        }
+        </div>
+
+       
+  </div>
+ 
+
+
+
+

@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+}
+@*<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-dark w3-bar-block" style="width:15%">
+        <h3 class="w3-bar-item">Menu</h3>
+        <a href="/Rayon/Index" class="w3-bar-item w3-button">Rayons</a>
+        <a href="/Product/Index" class="w3-bar-item w3-button">Uruns</a>
+        <a href="/Login/LogOut" class="w3-bar-item w3-button">LogOut</a>
+    </div>
+
+    <!-- Page Content -->
+    <div style="margin-left:15%">
+
+        <div class="w3-container w3-teal">
+            <h1>Admin Page</h1>
+        </div>
+
+
+        <div class="w3-container">
+            @RenderBody()
+        </div>
+
+    </div>
+
+</body>
+</html>
+*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    @RenderSection("Css",false)
+    
+    
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark">
+        <div class="container-fluid " >
+         
+            <ul class="navbar-nav" style="color:white">
+            
+                <li class="nav-item">
+                    <h5 style="margin-right:120px;margin-top:10px;">Admin Page</h5>
+                </li>
+                <li class="nav-item" style="color:white;">
+                    <a style="color:white" class="nav-link" href="/User/Page/">Home</a>
+                </li>
+                <li class="nav-item" >
+                    <a style="color:white" class="nav-link" href="/Rayon/Index/">Reyon</a>
+                </li>
+                <li class="nav-item" style="color:white">
+                    <a style="color:white" class="nav-link" href="/Product/Index/">Products</a>
+                </li>
+                <li class="nav-item" style="color:white">
+                    <a style="color:white" class="nav-link" href="/Admin/RoleList/">Roles</a>
+                </li>
+                <li class="nav-item" style="color:white">
+                    <a style="color:white" class="nav-link" href="/Admin/Users/">Users</a>
+                </li>
+                 
+               
+            </ul>
+ 
+            <a style="color:white;float:right;margin-right:20px;" class="nav-link" href="/Account/LogOut/"> LogOut <span style="margin-left:50px;color:cornsilk">Admin   Sn.    <span style="color:darkturquoise;font-size:20px;padding-left:10px;">@ViewBag.Login</span> </span> </a>
+         
+        </div>
+       
+    </nav>
+
+    <div class="container-fluid mt-3">
+      @RenderBody()
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    @RenderSection("Scripts",false)
+
+</body>
+</html>
